@@ -85,3 +85,13 @@ class RefreshTokenRepository(ABC):
 
     @abstractmethod
     def revogar(self, token: str) -> None: ...
+
+class VagaRepository(ABC):
+    @abstractmethod
+    def salvar(self, vaga: Vaga) -> None: ...
+
+    @abstractmethod
+    def buscar(self, vaga_id: str) -> Optional[Vaga]: ...
+
+    @abstractmethod
+    def listar_por_empresa(self, empresa_id: str) -> list[Vaga]: ...
