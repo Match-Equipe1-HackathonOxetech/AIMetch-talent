@@ -8,6 +8,11 @@ app = criar_app()
 
 import os
 
+from flask_cors import CORS
+CORS(app, resources={r"/": {"origins": ""}}, supports_credentials=False,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
