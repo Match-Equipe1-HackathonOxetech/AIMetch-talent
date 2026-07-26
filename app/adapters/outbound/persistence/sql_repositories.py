@@ -216,3 +216,20 @@ class SqlRefreshTokenRepository(RefreshTokenRepository):
         if modelo:
             modelo.revogado = True
             self.session.commit()
+
+    def listar_por_empresa(self, empresa_id: str) -> list[Vaga]:
+        modelos = (
+            self.session.query(VagaModel)
+            .filter_by(empresa_id=empresa_id)
+            .all()
+        )
+    
+        return [
+            Vaga(
+                id=modelo.id,
+                empresa_id=modelo.empresa_id,
+                titulo=modelo.titulo,
+                softskills_alvo=modelo.softskills_alvo,
+            )
+            for modelo in modelos
+        ]
