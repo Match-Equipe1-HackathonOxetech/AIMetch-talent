@@ -95,3 +95,9 @@ class VagaRepository(ABC):
 
     @abstractmethod
     def listar_por_empresa(self, empresa_id: str) -> list[Vaga]: ...
+        
+class VagaRepository(ABC):
+
+    @abstractmethod
+    def listar(self) -> list[Vaga]:
+        ...
