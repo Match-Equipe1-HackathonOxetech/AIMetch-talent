@@ -22,3 +22,15 @@ class VagaService:
         if vaga.empresa_id != solicitante_id:
             raise AcessoNegado("Você não tem acesso aos resultados desta vaga")
         return self.resultado_repo.listar_por_vaga(vaga_id)
+    def listar_vagas_empresa(
+        self,
+        empresa_id: str,
+        solicitante_id: str,
+    ) -> list[Vaga]:
+    
+        if empresa_id != solicitante_id:
+            raise AcessoNegado(
+                "Você não pode visualizar vagas de outra empresa."
+            )
+    
+        return self.vaga_repo.listar_por_empresa(empresa_id)
