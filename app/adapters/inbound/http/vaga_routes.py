@@ -33,3 +33,20 @@ def criar_vaga_blueprint(vaga_service: VagaService, requer_role) -> Blueprint:
         ])
 
     return bp
+    
+@bp.route("/empresas/<empresa_id>/vagas", methods=["GET"])
+@requer_role("recrutador")
+def listar_vagas_empresa(empresa_id):
+    vagas = vaga_service.listar_vagas_empresa(
+        empresa_id,
+        g.usuario_id,
+    )
+
+    return jsonify([
+        {
+            "id": vaga.id,
+            "titulo": vaga.titulo,
+            "softskills_alvo": vaga.softskills_alvo,
+        }
+        for vaga in vagas
+    ])
